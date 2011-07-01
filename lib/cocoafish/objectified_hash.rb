@@ -3,10 +3,14 @@ module Cocoafish
   class ObjectifiedHash
 
       def initialize hash
-          @data = hash.inject({}) do |data, (key,value)|  
-              value = ObjectifiedHash.new value if value.kind_of? Hash
-              data[key.to_s] = value
-              data
+          @data = hash.inject({}) do |data, (key,value)|
+            if value.kind_of? Hash  
+              value = ObjectifiedHash.new value
+            elsif value.kind_of? Array
+              value = value.map {|arrayvalue| ObjectifiedHash.new arrayvalue}
+            end
+            data[key.to_s] = value
+            data
           end
       end
 
