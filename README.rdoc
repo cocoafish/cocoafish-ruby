@@ -1,4 +1,4 @@
-= cocoafish
+= cocoafish-ruby
 
 Description goes here.
 

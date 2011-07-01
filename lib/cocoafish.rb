@@ -6,6 +6,7 @@ require 'cocoafish/hash_utils'
 require 'cocoafish/connection'
 require 'cocoafish/endpoint'
 require 'cocoafish/client'
+require 'cocoafish/objectified_hash'
 
 module Cocoafish
   REALM = "http://api.cocoafish.com"

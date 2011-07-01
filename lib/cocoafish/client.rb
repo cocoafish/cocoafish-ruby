@@ -46,7 +46,8 @@ module Cocoafish
       end
       
       def parse_response(json_hash)
-        HashUtils.recursively_symbolize_keys(json_hash)
+      #  HashUtils.recursively_symbolize_keys(json_hash)
+        ObjectifiedHash.new(json_hash)
       end
     end
 

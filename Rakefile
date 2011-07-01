@@ -12,7 +12,7 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "cocoafish"
+  gem.name = "cocoafish-ruby"
   gem.homepage = "http://github.com/baobeimm/cocoafish"
   gem.license = "MIT"
   gem.summary =  %Q{A Cocoafish Ruby Client} 
@@ -48,7 +48,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "cocoafish #{version}"
+  rdoc.title = "cocoafish-ruby #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
