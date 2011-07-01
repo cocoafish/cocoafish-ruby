@@ -4,7 +4,7 @@ module Cocoafish
 
     class << self
       
-      def custom(path)
+      def url(path)
         endpoint_url path, 'v1'
       end
       
@@ -22,6 +22,10 @@ module Cocoafish
       
       def delete(object_type)
         endpoint_url "#{object_type}s/delete.json", "v1"
+      end
+      
+      def show(object_type)
+      endpoint_url "#{object_type}s/show.json", "v1"
       end
       
       def endpoint_url(path, version)
