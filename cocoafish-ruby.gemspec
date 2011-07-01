@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
     "lib/cocoafish/client.rb",
     "lib/cocoafish/connection.rb",
     "lib/cocoafish/endpoint.rb",
-    "lib/cocoafish/hash_utils.rb",
     "lib/cocoafish/objectified_hash.rb"
   ]
   s.homepage = %q{http://github.com/baobeimm/cocoafish}

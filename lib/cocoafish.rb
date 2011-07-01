@@ -2,7 +2,6 @@ require 'uri'
 require 'json'
 require 'oauth'
 
-require 'cocoafish/hash_utils'
 require 'cocoafish/connection'
 require 'cocoafish/endpoint'
 require 'cocoafish/client'
