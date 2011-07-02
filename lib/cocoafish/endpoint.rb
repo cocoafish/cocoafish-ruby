@@ -28,9 +28,9 @@ module Cocoafish
   #    endpoint_url "#{object_type}s/show.json", "v1"
   #    end
       
-  #    def endpoint_url(path, version)
-  #      [REALM, version, path].join('/')
-  #    end
+      def endpoint_url(path, version)
+        [REALM, version, path].join('/')
+      end
     end
 
   end
