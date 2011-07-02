@@ -14,4 +14,4 @@ end
 
 gem "oauth"
 gem "json_pure"
-
+gem "rake", "0.9.2"
