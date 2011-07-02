@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
     "./README.rdoc",
     "./Rakefile",
     "./VERSION",
-    "./cocoafish-ruby.gemspec",
+    "./cocoafish.gemspec",
     "lib/cocoafish.rb",
     "lib/cocoafish/client.rb",
     "lib/cocoafish/connection.rb",
