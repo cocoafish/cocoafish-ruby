@@ -12,6 +12,6 @@ group :development do
   gem "rcov", ">= 0"
 end
 
-gem "oauth"
+gem "oauth-ruby"
 gem "json_pure"
 gem "rake", "0.9.2"
