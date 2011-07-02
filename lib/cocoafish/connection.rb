@@ -32,7 +32,7 @@ module Cocoafish
       #  puts "@cookies is #{@cookies}"
         headers['Cookie'] = @cookies unless @cookies.blank?
 
-        if [:get, :delete].include?(method) && !data.nil?
+        if [:get, :delete, :put].include?(method) && !data.nil?
           endpoint = endpoint + '?' + build_query(data)
         end
 
@@ -53,7 +53,7 @@ module Cocoafish
             response = @access_token.request(method, endpoint, headers)
           when :put
             # bug with ruby oauth gem, have to put params in the url for now
-            response = @access_token.request(method, endpoint, data, headers)
+            response = @access_token.request(method, endpoint, {}, headers)
           when :post
             response = @access_token.request(method, endpoint, data, headers)
         end
