@@ -8,8 +8,8 @@ require 'cocoafish/client'
 require 'cocoafish/objectified_hash'
 
 module Cocoafish
-  REALM = "http://api.cocoafish.com"
-  VERSION = File.read(File.join(File.dirname(__FILE__), '..', 'VERSION'))
+  API_VERSION = "v1"
+  CLIENT_VERSION = File.read(File.join(File.dirname(__FILE__), '..', 'VERSION'))
 
   class CocoafishError < StandardError; end
   class Unauthorized < CocoafishError; end

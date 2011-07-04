@@ -3,8 +3,8 @@ module Cocoafish
 
     attr_accessor :debug
 
-    def initialize(token, secret)
-      consumer = OAuth::Consumer.new(token, secret, :site => REALM)
+    def initialize(token, secret, realm)
+      consumer = OAuth::Consumer.new(token, secret, :site => realm)
       @access_token = OAuth::AccessToken.new(consumer)
       debug = false
     end
@@ -28,9 +28,11 @@ module Cocoafish
     private
 
       def request(method, endpoint, data)
-        headers = {'User-Agent' => "Cocoafish Ruby Client v#{VERSION}"}
-      #  puts "@cookies is #{@cookies}"
-        headers['Cookie'] = @cookies unless @cookies.blank?
+        headers = {'User-Agent' => "Cocoafish Ruby Client v#{CLIENT_VERSION}"}
+      
+        if defined?(@cookies) && @cookies != nil && @cookies != ""
+          headers['Cookie'] = @cookies
+        end
 
         if [:get, :delete, :put].include?(method) && !data.nil?
           endpoint = endpoint + '?' + build_query(data)

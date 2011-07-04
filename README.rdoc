@@ -1,6 +1,46 @@
-= cocoafish-ruby
+= cocoafish
 
-Description goes here.
+A Cocoafish Ruby client.
+
+For full API documentation on APIs see:
+
+http://cocoafish.com/docs/rest
+
+== Installation
+
+For Rails 3, add this to your Gemfile:
+
+  gem 'cocoafish'
+  
+For plain Ruby:
+
+  # sudo gem install cocoafish
+
+== Examples
+
+Start by setting your OAuth credentials for your app which can be found at http://cocoafish.com/apps:
+
+  > Cocoafish::Client.set_credentials('token', 'secret')
+
+=== Logging In a User
+
+  > response = Cocoafish::Client.post("users/login.json", {:login => "mike@cocoafish.com", :password => "pass"})
+  > result.users[0].id
+   => "4e10f444d0afbe4137000003"
+  > result.users[0].first_name
+   => "Mike"
+   
+=== Creating a Photo
+
+  > response = Cocoafish::Client.post("photos/create.json", {:user_id => "4e10f444d0afbe4137000003", :photo => "/tmp/photo.jpg"})
+  > result.users[0].id
+   => "4e10f444d0afbe4137000003"
+  > result.users[0].first_name
+   => "Mike"
+  
+=== Other APIs
+
+For more examples see: http://cocoafish.com/docs/rest
 
 == Contributing to cocoafish
  
@@ -14,6 +54,5 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2011 Wei. See LICENSE.txt for
-further details.
+Copyright (c) 2011 Cocoafish. See LICENSE.txt for further details.
 

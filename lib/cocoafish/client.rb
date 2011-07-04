@@ -4,11 +4,13 @@ module Cocoafish
 
     @@connection = nil
     @@debug = false
+    @@realm = "http://api.cocoafish.com"
 
     class << self
 
-      def set_credentials(token, secret)
-        @@connection = Connection.new(token, secret)
+      def set_credentials(token, secret, realm = nil)
+        @@realm = realm || @@realm
+        @@connection = Connection.new(token, secret, @@realm)
         @@connection.debug = @@debug
       end
 
@@ -23,30 +25,29 @@ module Cocoafish
       
       def get(endpoint, data=nil)
         raise NoConnectionEstablished  if @@connection.nil?
-        json_hash = @@connection.get endpoint, data
+        json_hash = @@connection.get Cocoafish::Endpoint.url(@@realm, endpoint), data
         parse_response(json_hash)
       end
 
       def delete(endpoint, data=nil)
         raise NoConnectionEstablished  if @@connection.nil?
-        json_hash = @@connection.delete endpoint, data
+        json_hash = @@connection.delete Cocoafish::Endpoint.url(@@realm, endpoint), data
         parse_response(json_hash)
       end
 
       def post(endpoint, data=nil)
         raise NoConnectionEstablished  if @@connection.nil?
-        json_hash = @@connection.post endpoint, data
+        json_hash = @@connection.post Cocoafish::Endpoint.url(@@realm, endpoint), data
         parse_response(json_hash)
       end
 
       def put(endpoint, data=nil)
         raise NoConnectionEstablished  if @@connection.nil?
-        json_hash = @@connection.put endpoint, data
+        json_hash = @@connection.put Cocoafish::Endpoint.url(@@realm, endpoint), data
         parse_response(json_hash)
       end
       
       def parse_response(json_hash)
-      #  HashUtils.recursively_symbolize_keys(json_hash)
         ObjectifiedHash.new(json_hash)
       end
     end
