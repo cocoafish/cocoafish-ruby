@@ -12,7 +12,7 @@ group :development do
   gem "rcov", ">= 0"
 end
 
-gem "hashie", "~> 1.0.0"
-gem "json_pure", "~> 1.4.6"
-gem 'simple_oauth', "~> 0.1.4"
-gem "rest-client", "~> 1.6.3"
+gem "hashie", ">= 1.0.0"
+gem "json_pure", ">= 1.4.6"
+gem 'simple_oauth', ">= 0.1.4"
+gem "rest-client", ">= 1.6.3"
