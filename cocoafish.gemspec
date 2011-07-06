@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "./Gemfile",
-    "./Gemfile.lock",
     "./LICENSE.txt",
     "./README.rdoc",
     "./Rakefile",
@@ -30,7 +29,7 @@ Gem::Specification.new do |s|
     "lib/cocoafish/endpoint.rb",
     "lib/cocoafish/objectified_hash.rb"
   ]
-  s.homepage = %q{http://github.com/baobeimm/cocoafish}
+  s.homepage = %q{http://github.com/cocoafish}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.7.2}
