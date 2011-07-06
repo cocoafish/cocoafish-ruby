@@ -4,9 +4,9 @@ module Cocoafish
     attr_accessor :debug
 
     def initialize(token, secret, realm)
-      consumer = OAuth::Consumer.new(token, secret, :site => realm)
-      @access_token = OAuth::AccessToken.new(consumer)
-      debug = false
+      @key = token
+      @secret = secret
+      @cookies = Hash.new
     end
 
     def get(endpoint, data=nil)
@@ -25,97 +25,64 @@ module Cocoafish
       request :put, endpoint, data
     end
 
-    private
+  private
 
-      def request(method, endpoint, data)
-        headers = {'User-Agent' => "Cocoafish Ruby Client v#{CLIENT_VERSION}"}
+    def request(method, endpoint, data)
+
+      headers = { 'User-Agent' => "Cocoafish Ruby Client v#{CLIENT_VERSION}", :cookies => @cookies }
+
+      oauth_options = {
+        :consumer_key => @key,
+        :consumer_secret => @secret,
+        :token => "",
+        :token_secret => "",
+        :nonce => rand(10 ** 30).to_s.rjust(30,'0'),
+        :timestamp => Time.now.to_i
+      }
       
-        if defined?(@cookies) && @cookies != nil && @cookies != ""
-          headers['Cookie'] = @cookies
-        end
-
-        if [:get, :delete, :put].include?(method) && !data.nil?
-          endpoint = endpoint + '?' + build_query(data)
-        end
-
-        if debug
-          puts "request: #{method.to_s.upcase} #{endpoint}"
-          puts "headers:" 
-          request.header.each do |key, value|
-            puts "#{key}=#{value}"
-          end
-          if [:post, :put].include?(method) && !data.nil?
-            puts "data:"
-            puts data.to_json
-          end
-        end
-
-        case method
-          when :get, :delete
-            response = @access_token.request(method, endpoint, headers)
-          when :put
-            # bug with ruby oauth gem, have to put params in the url for now
-            response = @access_token.request(method, endpoint, {}, headers)
-          when :post
-            response = @access_token.request(method, endpoint, data, headers)
-        end
-
-        response.header.each do |key, value|
-          if key == "set-cookie"
-            @cookies = value
-           end
-        end
-        
-        if debug
-          puts "\nresponse: #{response.code}"
-          puts "headers:"
-          response.header.each do |key, value|
-            puts "#{key}=#{value}"
-          end
-          puts "body:"
-          puts response.body
-        end
-
-        raise_errors(response)
-
-        if response.body.empty?
-          content = nil
-        else
+      case method
+        when :get, :delete
+          
+          oauth_header = SimpleOAuth::Header.new(method, endpoint, data, oauth_options)
+          options = headers.merge(:params => data, :authorization => oauth_header)
           begin
-            content = JSON.parse(response.body)
-          rescue JSON::ParserError
-            raise DecodeError, "content: <#{response.body}>"
+            response = RestClient.send(method, endpoint, options)            
+          rescue RestClient::Exception => e
+            raise CocoafishError.new(e), nil, caller[5..-1]
           end
-        end
 
-        content
-      end
-
-      def build_query(data)
-        data.map do |key, value|
-          [key.to_s, URI.escape(value.to_s)].join('=')
-        end.join('&')
-      end
-
-      def raise_errors(response)
-        response_description = "(#{response.code}): #{response.message}"
-        response_description += " - #{response.body}"  unless response.body.empty?
-
-        case response.code.to_i
-          when 401
-            raise Unauthorized
-          when 404
-            raise NotFound
-          when 500
-            raise ServerError, "Cocoafish had an internal error. Please let them know. #{response_description}"
-          when 502..503
-            raise Unavailable, response_description
-          else
-            unless response.is_a? Net::HTTPSuccess
-              raise CocoafishError, response_description
+        when :post, :put
+          
+          data.each do |key,value|
+            if key.to_s == "photo" || key.to_s =~ /photos\[\d+\]/
+              data[key] = File.new(value, 'rb')
             end
+          end
+          data.merge!(:multipart => true)
+
+          oauth_header = SimpleOAuth::Header.new(method, endpoint, nil, oauth_options)
+          options = headers.merge(:authorization => oauth_header)
+          
+          begin
+            response = RestClient.send(method, endpoint, data, options)
+          rescue RestClient::Exception => e
+            raise CocoafishError.new(e), nil, caller[3..-1]
+          end
+      end
+        
+      @cookies.merge!(response.cookies)
+
+      if response.body.empty?
+        content = nil
+      else
+        begin
+          content = JSON.parse(response.body)
+        rescue JSON::ParserError
+          raise DecodeError, "content: <#{response.body}>"
         end
       end
 
+      return content, response.body
+    end
   end
 end

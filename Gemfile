@@ -12,6 +12,8 @@ group :development do
   gem "rcov", ">= 0"
 end
 
-gem "oauth"
-gem "json_pure"
 gem "rake", "0.9.2"
+gem "hashie", "1.0.0"
+gem "json_pure", "1.4.6"
+gem 'simple_oauth', '0.1.4'
+gem "rest-client", :require => 'rest_client'
