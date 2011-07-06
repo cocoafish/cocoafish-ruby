@@ -80,9 +80,11 @@ module Cocoafish
         rescue JSON::ParserError
           raise DecodeError, "content: <#{response.body}>"
         end
+        # add json data
+        content[:json] = response.body
       end
-
-      return content, response.body
+      
+      return content
     end
   end
 end
