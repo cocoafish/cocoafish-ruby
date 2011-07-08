@@ -51,7 +51,7 @@ module Cocoafish
         ObjectifiedHash.new(json_hash)
       end
       
-      def get_paginated_array(objecitifed_response, arrayname)
+      def get_paginated_array(response, arrayname)
         array = response.response[arrayname]
 
         if array && response.meta.page
