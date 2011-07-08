@@ -51,15 +51,25 @@ module Cocoafish
         ObjectifiedHash.new(json_hash)
       end
 
-      def get_paginated_array(response, arrayname)
+      def get_paginated_array(response)
+        if response.json == nil
+          return nil
+        end
+        content = JSON.parse(response.json)
+        if content["response"].keys.count != 1
+          return nil
+        end
+
+        arrayname = content["response"].keys.first
         orig_array = response.response.send arrayname
-        if response.meta.page && orig_array         
+        if response.meta.page && orig_array     
           array =  WillPaginate::Collection.create(response.meta.page, response.meta.per_page, response.meta.total_results) do |pager|
             pager.replace(orig_array)
           end
         end
         array
       end
+
       
   end
 
