@@ -69,7 +69,7 @@ module Cocoafish
         end
         array
       end
-
+    end
       
   end
 
