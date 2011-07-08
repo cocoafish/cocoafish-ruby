@@ -20,10 +20,6 @@ Jeweler::Tasks.new do |gem|
   gem.email = "wei@cocoafish.com"
   gem.authors = ["Wei Kong"]
   gem.files = Dir["{lib}/**/*", "./*"]
-  # Include your dependencies below. Runtime dependencies are required when using your gem,
-  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
   gem.add_runtime_dependency 'rest-client', '~> 1.6.3'
   gem.add_runtime_dependency 'json_pure', '~> 1.4.6'
   gem.add_runtime_dependency 'simple_oauth', '~> 0.1.4'
@@ -51,7 +47,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "cocoafish-ruby #{version}"
+  rdoc.title = "cocoafish #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
