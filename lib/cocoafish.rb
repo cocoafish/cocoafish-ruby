@@ -6,6 +6,7 @@ require 'simple_oauth'
 require 'cocoafish/connection'
 require 'cocoafish/endpoint'
 require 'cocoafish/client'
+require 'cocoafish/cocoafish_object'
 require 'cocoafish/objectified_hash'
 
 module Cocoafish
@@ -29,5 +30,5 @@ module Cocoafish
     def response
        @re.response
      end
-  end
+  end  
 end

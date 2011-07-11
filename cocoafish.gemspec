@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cocoafish}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wei Kong"]
-  s.date = %q{2011-07-07}
+  s.date = %q{2011-07-11}
   s.description = %q{Ruby client to access Cocoafish}
   s.email = %q{wei@cocoafish.com}
   s.extra_rdoc_files = [
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "./cocoafish.gemspec",
     "lib/cocoafish.rb",
     "lib/cocoafish/client.rb",
+    "lib/cocoafish/cocoafish_object.rb",
     "lib/cocoafish/connection.rb",
     "lib/cocoafish/endpoint.rb",
     "lib/cocoafish/objectified_hash.rb"
