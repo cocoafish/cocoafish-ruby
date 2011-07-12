@@ -59,12 +59,12 @@ module Cocoafish
         end
         
         # make sure we have only 1 top-level object in the response (users, places, etc.)
-        if result.response.instance_variables.count != 1
+        if response.response.instance_variables.count != 1
           return nil
         end
         
         # get the response array
-        orig_array = result.response.instance_variable_get(result.response.instance_variables.first)
+        orig_array = response.response.instance_variable_get(response.response.instance_variables.first)
 
         # create the paginated object
         if response.meta.page && orig_array     
