@@ -8,9 +8,9 @@ module Cocoafish
 
     class << self
 
-      def set_credentials(token, secret, realm = nil)
-        @@realm = realm || @@realm
-        @@connection = Connection.new(token, secret, @@realm)
+      def set_credentials(token, secret, options = {})
+        @@realm = options[:hostname] || @@realm
+        @@connection = Connection.new(token, secret, options)
         @@connection.debug = @@debug
       end
       

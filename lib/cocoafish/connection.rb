@@ -3,10 +3,11 @@ module Cocoafish
 
     attr_accessor :session_id, :debug
 
-    def initialize(token, secret, realm)
+    def initialize(token, secret, options = {})
       @key = token
       @secret = secret
       @cookies = Hash.new
+      @options = options
     end
 
     def get(endpoint, data=nil)
@@ -29,12 +30,19 @@ module Cocoafish
 
     def request(method, endpoint, data)
 
-      # override any session id that's in the cookie hash
-      if @session_id
-        @cookies[:_session_id] = @session_id
+      # set the cookies to send with the header
+      if !@options.has_key?(:manage_cookies) || @options[:manage_cookies] != false
+        @header_cookies = @cookies
+      else
+        @header_cookies = {}
       end
 
-      headers = { 'User-Agent' => "Cocoafish Ruby Client v#{CLIENT_VERSION}", :cookies => @cookies }
+      # set the session id
+      if @session_id
+        @header_cookies[:_session_id] = @session_id
+      end
+
+      headers = { 'User-Agent' => "Cocoafish Ruby Client v#{CLIENT_VERSION}", :cookies => @header_cookies }
 
       oauth_options = {
         :consumer_key => @key,
@@ -74,7 +82,8 @@ module Cocoafish
             raise CocoafishError.new(e), nil, caller[3..-1]
           end
       end
-        
+
+      # grab the cookies from the response
       @cookies.merge!(response.cookies)
 
       if response.body.empty?
@@ -93,3 +102,5 @@ module Cocoafish
     end
   end
 end
+
+
