@@ -13,6 +13,10 @@ module Cocoafish
         @@connection = Connection.new(token, secret, @@realm)
         @@connection.debug = @@debug
       end
+      
+      def set_session_id(session_id = nil)
+        @@connection.session_id = session_id
+      end
 
       def debug=(debug_flag)
         @@debug = debug_flag

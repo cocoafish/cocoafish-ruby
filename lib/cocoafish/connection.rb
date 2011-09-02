@@ -1,7 +1,7 @@
 module Cocoafish
   class Connection
 
-    attr_accessor :debug
+    attr_accessor :session_id, :debug
 
     def initialize(token, secret, realm)
       @key = token
@@ -28,6 +28,11 @@ module Cocoafish
   private
 
     def request(method, endpoint, data)
+
+      # override any session id that's in the cookie hash
+      if @session_id
+        @cookies[:_session_id] = @session_id
+      end
 
       headers = { 'User-Agent' => "Cocoafish Ruby Client v#{CLIENT_VERSION}", :cookies => @cookies }
 
