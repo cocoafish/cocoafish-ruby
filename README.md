@@ -117,38 +117,39 @@ Errors returned from the Cocoafish API will be thrown as an exception. Wrap Coco
       puts "Login failed: #{e.message}"
     end
 
-## Examples
+## Code Samples
 
-### Authenticating with Ccooafish
+### Checkin App Example
 
-Find the OAuth consumer key and secret for you app from http://cocoafish.com/apps and use them to set the credentials so that your code can talk to the Cocoafish API servers.
+The following script shows how to perform actions required for a checkin app:
 
-    > Cocoafish::Client.set_credentials('token', 'secret')
+    require 'rubygems'
+    require 'cocoafish'
 
-### Logging In a User
+    # set Oauth consumer key and secret from your app
+    Cocoafish::Client.set_credentials("7z5w8Jcg3iUejPab9ugty15oacju8fSF", "Jxc18og2eq1G0Al9jAFoE3CUfCUdFS6L")
 
-    > response = Cocoafish::Client.post("users/login.json", {:login => "mike@cocoafish.com", :password => "pass"})
-    > result.users[0].id
-    => "4e10f444d0afbe4137000003"
-    > result.users[0].first_name
-    => "Mike"
-   
-### Creating a Photo
+    # create a user which logs her in automatically
+    result = Cocoafish::Client.post("users/create.json", {:email => "jane@cocoafish.com", :password => "cocoafish", :password_confirmation => "cocoafish", :first_name => "Jane", :last_name => "User"})
 
-    > response = Cocoafish::Client.post("photos/create.json", {:user_id => "4e10f444d0afbe4137000003", :photo => "/tmp/photo.jpg"})
-    > result.users[0].id
-    => "4e10f444d0afbe4137000003"
-    > result.users[0].first_name
-    => "Mike"
+    # get the user's id
+    user_id = result.response.users[0].id
+
+    # create a photo
+    result = Cocoafish::Client.post("photos/create.json", {:photo => "/Users/jane/Desktop/photo.jpg"})
+    photo_id = result.response.photos[0].id
+
+    # delete the user
+    result = Cocoafish::Client.delete("users/delete.json")
   
 ## Additional APIs
 
 For more examples of API usage see the [Cocoafish REST API](http://cocoafish.com/docs/rest) documentation.
 
-## Support
-
-For questions or comments about the Cocoafish Ruby client gem, or about Cocoafish in general, contact info@cocoafish.com.
-
 ## Copyright
 
 Copyright (c) 2011 Cocoafish. See LICENSE.txt for further details.
+
+## Support
+
+For questions or comments about the Cocoafish Ruby client gem, or about Cocoafish in general, contact <info@cocoafish.com>.
