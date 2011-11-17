@@ -53,35 +53,69 @@ Use the Cocoafish client http methods to store and retrive data with Cocoafish b
 The url path is the suffix of a [Cocoafish REST API](http://cocoafish.com/docs/rest) call such as:
 
     result = Cocoafish::Client.get("places/show.json", {:place_id => "4e10f444d0afbe4156000019"})
-    result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish", :password_confirmation => "cocoafish"})
+    result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
 
 ### Processing Responses
 
 Cocoafish API servers return data in JSON format:
 
-        
-  
+    {
+      "meta": {
+        "status": "ok",
+        "code": 200,
+        "method_name": "createUser",
+        "session_id": "6z4xBTs-cg1fL7U7RGVDSw_9vC8"
+      },
+      "response": {
+        "users": [
+          {
+            "id": "4ec4c607356f4e12c8000035",
+            "first_name": "Jane",
+            "last_name": "User",
+            "created_at": "2011-11-17T08:29:59+0000",
+            "updated_at": "2011-11-17T08:29:59+0000",
+            "email": "jane@cocoafish.com"
+          }
+        ]
+      }
+    }
 
-The Ruby client library provides access to the raw JSON:
+The Ruby client library provides the response wrapped in an object accessible through dot notation:
 
-    result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish", :password_confirmation => "cocoafish"})
-    puts result.users[0].id
-    puts result.users[0].first_name
+    $ irb
+    > result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
+    > puts result.response.users[0].id
+    4ec4c870356f4e12c8000038
+    > puts result.response.users[0].first_name
+    Jane
+
+Or, the original JSON reponse string can be accessed:
+
+    > result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
+    > json_result = JSON.parse(result.json)
+    > puts result.response.users[0].id
+    4ec4c870356f4e12c8000038
+    > puts json_result["response"]["users"][0]['first_name']
+    Jane
     
-As well as providng the data wrapped in a Ruby Object with fields accessible through dot notation:
+The response code and message can be retreived through the meta:
 
-    
-    
-
-
-
-    result.
-
-that can be accessed by
+    > puts result.meta.status
+    ok
+    > puts result.meta.code
+    200
+    > puts result.meta.method_name
+    createUser
 
 ### Handling Errors
 
-Errors returned from the Cocoafish API will be thrown as an exception. Wrap Cocoaifsh client calls in a begin/rescue block to 
+Errors returned from the Cocoafish API will be thrown as an exception. Wrap Cocoaifsh client calls in a begin/rescue block to capture and handle them gracefully.
+
+    begin
+      result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
+    rescue Cocoafish::CocoafishError => e
+      puts "Login failed: #{e.message}"
+    end
 
 ## Examples
 
@@ -107,10 +141,14 @@ Find the OAuth consumer key and secret for you app from http://cocoafish.com/app
     > result.users[0].first_name
     => "Mike"
   
-### Other APIs
+## Additional APIs
 
-For more examples see: http://cocoafish.com/docs/rest
+For more examples of API usage see the [Cocoafish REST API](http://cocoafish.com/docs/rest) documentation.
 
-== Copyright
+## Support
+
+For questions or comments about the Cocoafish Ruby client gem, or about Cocoafish in general, contact info@cocoafish.com.
+
+## Copyright
 
 Copyright (c) 2011 Cocoafish. See LICENSE.txt for further details.
