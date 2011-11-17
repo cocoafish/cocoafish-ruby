@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Wei Kong"]
+  s.authors = ["Michael Goff", "Wei Kong"]
   s.date = "2011-11-17"
-  s.description = "Ruby client to access Cocoafish"
-  s.email = "wei@cocoafish.com"
+  s.description = "A Ruby client for Cocoafish. For more information about Mongo, see http://cocoafish.com."
+  s.email = "info@cocoafish.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"
@@ -31,11 +31,11 @@ Gem::Specification.new do |s|
     "lib/cocoafish/endpoint.rb",
     "lib/cocoafish/objectified_hash.rb"
   ]
-  s.homepage = "http://github.com/cocoafish"
+  s.homepage = "http://cocoafish.com"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.10"
-  s.summary = "A Cocoafish Ruby Client"
+  s.summary = "Cocoafish Ruby Client"
   s.test_files = [
     "test/helper.rb",
     "test/test_cocoafish.rb"
