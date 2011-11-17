@@ -157,7 +157,7 @@ The following script shows how to perform actions required for a checkin app: cr
       puts "  Photo:   #{checkin.photo.urls.large_1024}\n\n"
     end
     
-Running this script performs the actions and shows the nearby checkins:
+Running this script performs the actions and shows the nearby checkins along with URLs for the uploaded checkin photos:
 
     Checkin 0
       User:    Jane User
