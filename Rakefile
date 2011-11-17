@@ -13,12 +13,12 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "cocoafish"
-  gem.homepage = "http://github.com/cocoafish"
+  gem.homepage = "http://cocoafish.com"
   gem.license = "MIT"
-  gem.summary =  %Q{A Cocoafish Ruby Client} 
-  gem.description =  "Ruby client to access Cocoafish"%
-  gem.email = "wei@cocoafish.com"
-  gem.authors = ["Wei Kong"]
+  gem.summary =  %Q{Cocoafish Ruby Client} 
+  gem.description =  "A Ruby client for Cocoafish. For more information about Mongo, see http://cocoafish.com."
+  gem.email = "info@cocoafish.com"
+  gem.authors = ["Michael Goff", "Wei Kong"]
   gem.files = Dir["{lib}/**/*", "./*"]
   gem.add_runtime_dependency 'rest-client', '~> 1.6.3'
   gem.add_runtime_dependency 'json_pure', '~> 1.4.6'
