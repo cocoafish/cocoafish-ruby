@@ -1,12 +1,16 @@
-= cocoafish
+# cocoafish
 
-A Cocoafish Ruby client.
+This is a Ruby client for the Cocoafish server backand that can be used in your Ruby scripts and Ruby on Rails apps. For full documentation about the API methods that can be used through this gem, see the [Cocoafish REST API documentation](http://cocoafish.com/docs/rest). This has been developed and tested with Ruby 1.8.7/1.9.2 and Rails 3.0.5. Earlier versions of Ruby or Rails may not work.
 
-For full API documentation on APIs see:
+## Setup
 
-http://cocoafish.com/docs/rest
+Before your app can access the Cocoafish API servers, you must:
 
-== Installation
+1. Request a Beta invitation code at http://cocoafish.com/beta/signup
+2. Use the Beta invitation code to create an account at http://cocoafish.com/signup
+3. Register your app at http://cocoafish.com/apps to generate an app key, OAuth consumer key, and OAuth secret
+
+## Installation
 
 For Rails 3, add this to your Gemfile:
 
@@ -16,13 +20,13 @@ For plain Ruby:
 
   # sudo gem install cocoafish
 
-== Examples
+## Examples
 
 Start by setting your OAuth credentials for your app which can be found at http://cocoafish.com/apps:
 
   > Cocoafish::Client.set_credentials('token', 'secret')
 
-=== Logging In a User
+### Logging In a User
 
   > response = Cocoafish::Client.post("users/login.json", {:login => "mike@cocoafish.com", :password => "pass"})
   > result.users[0].id
@@ -30,7 +34,7 @@ Start by setting your OAuth credentials for your app which can be found at http:
   > result.users[0].first_name
    => "Mike"
    
-=== Creating a Photo
+### Creating a Photo
 
   > response = Cocoafish::Client.post("photos/create.json", {:user_id => "4e10f444d0afbe4137000003", :photo => "/tmp/photo.jpg"})
   > result.users[0].id
@@ -38,21 +42,10 @@ Start by setting your OAuth credentials for your app which can be found at http:
   > result.users[0].first_name
    => "Mike"
   
-=== Other APIs
+### Other APIs
 
 For more examples see: http://cocoafish.com/docs/rest
-
-== Contributing to cocoafish
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 == Copyright
 
 Copyright (c) 2011 Cocoafish. See LICENSE.txt for further details.
-
