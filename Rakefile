@@ -16,7 +16,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://cocoafish.com"
   gem.license = "MIT"
   gem.summary =  %Q{Cocoafish Ruby Client} 
-  gem.description =  "A Ruby client for Cocoafish. For more information about Mongo, see http://cocoafish.com."
+  gem.description =  "A Ruby client for Cocoafish. For more information about Cocoafish, see http://cocoafish.com."
   gem.email = "info@cocoafish.com"
   gem.authors = ["Michael Goff", "Wei Kong"]
   gem.files = Dir["{lib}/**/*", "./*"]
