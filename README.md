@@ -82,30 +82,29 @@ Cocoafish API servers return data in JSON format:
 
 The Ruby client library provides the response wrapped in an object accessible through dot notation:
 
-    $ irb
-    > result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
-    > puts result.response.users[0].id
-    4ec4c870356f4e12c8000038
-    > puts result.response.users[0].first_name
-    Jane
+    result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
+    puts result.response.users[0].id
+     => 4ec4c870356f4e12c8000038
+    puts result.response.users[0].first_name
+     => Jane
 
 Or, the original JSON reponse string can be accessed:
 
-    > result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
-    > json_result = JSON.parse(result.json)
-    > puts result.response.users[0].id
-    4ec4c870356f4e12c8000038
-    > puts json_result["response"]["users"][0]['first_name']
-    Jane
+    result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
+    json_result = JSON.parse(result.json)
+    puts result.response.users[0].id
+     => 4ec4c870356f4e12c8000038
+    puts json_result["response"]["users"][0]['first_name']
+     => Jane
     
 The response code and message can be retreived through the meta:
 
-    > puts result.meta.status
-    ok
-    > puts result.meta.code
-    200
-    > puts result.meta.method_name
-    createUser
+    puts result.meta.status
+     => ok
+    puts result.meta.code
+     => 200
+    puts result.meta.method_name
+     => createUser
 
 ### Handling Errors
 
@@ -121,27 +120,57 @@ Errors returned from the Cocoafish API will be thrown as an exception. Wrap Coco
 
 ### Checkin App Example
 
-The following script shows how to perform actions required for a checkin app:
+The following script shows how to perform actions required for a checkin app: create users, create places, checkin to places with photos, and search for checkins by location.
 
     require 'rubygems'
     require 'cocoafish'
 
     # set Oauth consumer key and secret from your app
-    Cocoafish::Client.set_credentials("7z5w8Jcg3iUejPab9ugty15oacju8fSF", "Jxc18og2eq1G0Al9jAFoE3CUfCUdFS6L")
+    Cocoafish::Client.set_credentials("7z5w8Jcg3iUemGab9ugty15oacju8fSF", "Jxc18og2eq1G0Mg9jAFoE3CUfCUdFS6L")
 
-    # create a user which logs her in automatically
-    result = Cocoafish::Client.post("users/create.json", {:email => "jane@cocoafish.com", :password => "cocoafish", :password_confirmation => "cocoafish", :first_name => "Jane", :last_name => "User"})
+    #  create a user which logs her in automatically
+    result = Cocoafish::Client.post("users/create.json", {:email => "jane5@cocoafish.com", :password => "cocoafish", :password_confirmation => "cocoafish", :first_name => "Jane", :last_name => "User"})
 
-    # get the user's id
-    user_id = result.response.users[0].id
+    # create a place
+    result = Cocoafish::Client.post("places/create.json", {:name => "Cocoafish HQ", :address => "156 2nd St", :city => "San Francisco", :state => "CA", :postal_code => "94107", :latitude => 37.787099, :longitude => -122.399101})
+    place_1_id = result.response.places[0].id
 
-    # create a photo
-    result = Cocoafish::Client.post("photos/create.json", {:photo => "/Users/jane/Desktop/photo.jpg"})
-    photo_id = result.response.photos[0].id
+    # checkin to the place with a photo and message
+    result = Cocoafish::Client.post("checkins/create.json", {:message => "Working hard!", :photo => "/Users/mgoff/Desktop/atwork.jpg", "photo_sync_sizes[]" => "large_1024", :place_id => place_1_id})
 
-    # delete the user
-    result = Cocoafish::Client.delete("users/delete.json")
-  
+    # create another place
+    result = Cocoafish::Client.post("places/create.json", {:name => "Kingdom of Dumpling", :address => "1713 Taraval St", :city => "San Francisco", :state => "CA", :postal_code => "94116", :latitude => 37.742640, :longitude => -122.484597})
+    place_2_id = result.response.places[0].id
+
+    # checkin to the place with a photo and message
+    result = Cocoafish::Client.post("checkins/create.json", {:message => "Eating some awesome Chinese dumplings!", :photo => "/Users/mgoff/Desktop/dumplings.jpg", "photo_sync_sizes[]" => "large_1024", :place_id => place_2_id})
+
+    # search for checkins from my current location in Union Square
+    result = Cocoafish::Client.get("checkins/search.json", {:latitude => 37.787930, :longitude => -122.407499})
+
+    # loop through the results and print them out
+    result.response.checkins.each_with_index do |checkin, index|
+      puts "Checkin #{index}"
+      puts "  User:    #{checkin.user.first_name} #{checkin.user.last_name}"
+      puts "  Place:   #{checkin.place.name}"
+      puts "  Message: #{checkin.message}"
+      puts "  Photo:   #{checkin.photo.urls.large_1024}\n\n"
+    end
+    
+Running this script performs the actions and shows the nearby checkins:
+
+    Checkin 0
+      User:    Jane User
+      Place:   Cocoafish HQ
+      Message: Working hard!
+      Photo:   http://storage.cocoafish.com/13B5z6WqEMRUVsqdmn1vudovz3RTexmn/photos/c9/39/4ec4e189356f4e12c80000c2/atwork_large_1024.jpg
+
+    Checkin 1
+      User:    Jane User
+      Place:   Kingdom of Dumpling
+      Message: Eating some awesome Chinese dumplings!
+      Photo:   http://storage.cocoafish.com/13B5z6WqEMRUVsqdmn1vudovz3RTexmn/photos/c9/39/4ec4db91356f4e12c8000055/dumplings_large_1024.jpg
+
 ## Additional APIs
 
 For more examples of API usage see the [Cocoafish REST API](http://cocoafish.com/docs/rest) documentation.
