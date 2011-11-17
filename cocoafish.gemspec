@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{cocoafish}
+  s.name = "cocoafish"
   s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wei Kong"]
-  s.date = %q{2011-09-02}
-  s.description = %q{Ruby client to access Cocoafish}
-  s.email = %q{wei@cocoafish.com}
+  s.date = "2011-11-17"
+  s.description = "Ruby client to access Cocoafish"
+  s.email = "wei@cocoafish.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -31,11 +31,11 @@ Gem::Specification.new do |s|
     "lib/cocoafish/endpoint.rb",
     "lib/cocoafish/objectified_hash.rb"
   ]
-  s.homepage = %q{http://github.com/cocoafish}
+  s.homepage = "http://github.com/cocoafish"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{A Cocoafish Ruby Client}
+  s.rubygems_version = "1.8.10"
+  s.summary = "A Cocoafish Ruby Client"
   s.test_files = [
     "test/helper.rb",
     "test/test_cocoafish.rb"
