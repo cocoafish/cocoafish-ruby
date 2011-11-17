@@ -37,7 +37,7 @@ Then include it in your scripts:
 
 ### Authenticating with Ccooafish
 
-Find the OAuth consumer key and secret for your app at http://cocoafish.com/apps and use them to set the credentials so that your app can talk to the Cocoafish API servers.
+Find the OAuth consumer key and secret for your app on the [Cocoafish app management site](http://cocoafish.com/apps) and use them to set the credentials so that your app can talk to the Cocoafish API servers.
 
     Cocoafish::Client.set_credentials('key', 'secret')
 
