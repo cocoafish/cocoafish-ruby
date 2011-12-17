@@ -30,6 +30,16 @@ module Cocoafish
 
     def request(method, endpoint, data)
 
+      if data
+        if !data.is_a?(Hash)
+          raise "data must be a hash of parameters"
+        end
+        data.each_pair do |k,v|
+          if v.is_a?(Hash) || v.is_a?(Array)
+          data[k] = v.to_json
+        end
+      end
+      
       # set the cookies to send with the header
       if !@options.has_key?(:manage_cookies) || @options[:manage_cookies] != false
         @header_cookies = @cookies
@@ -94,6 +104,7 @@ module Cocoafish
       
       return content
     end
+    
   end
 end
 
