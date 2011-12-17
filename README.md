@@ -35,15 +35,15 @@ Then include it in your scripts:
     
 ## Usage
 
-### Authenticating with Ccooafish
+### Authenticating with Cocoafish
 
 Find the OAuth consumer key and secret for your app on the [Cocoafish app management site](http://cocoafish.com/apps) and use them to set the credentials so that your app can talk to the Cocoafish API servers.
 
     Cocoafish::Client.set_credentials('key', 'secret')
 
-By default, Ruby Client uses http protocol, if you wish to use SSL, you can use the hostname option:
+By default the Ruby Client uses http. If you wish to use https (SSL) to send requests to Cocoafish, you can use the hostname option:
     
-    Cocoafish::Client.set_credentials('key', 'secret',  {:hostname=>"https://api.cocoafish.com"})
+    Cocoafish::Client.set_credentials('key', 'secret', {:hostname=>"https://api.cocoafish.com"})
 
 ### Making Requests
 
