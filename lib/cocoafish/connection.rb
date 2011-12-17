@@ -36,7 +36,8 @@ module Cocoafish
         end
         data.each_pair do |k,v|
           if v.is_a?(Hash) || v.is_a?(Array)
-          data[k] = v.to_json
+            data[k] = v.to_json
+          end
         end
       end
       
