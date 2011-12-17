@@ -136,14 +136,16 @@ The following script shows how to perform actions required for a checkin app: cr
     place_1_id = result.response.places[0].id
 
     # checkin to the place with a photo and message
-    result = Cocoafish::Client.post("checkins/create.json", {:message => "Working hard!", :photo => "/Users/mgoff/Desktop/atwork.jpg", "photo_sync_sizes[]" => "large_1024", :place_id => place_1_id})
+    photo = File.new("/Users/mgoff/Desktop/atwork.jpg", "rb")
+    result = Cocoafish::Client.post("checkins/create.json", {:message => "Working hard!", :photo => photo, "photo_sync_sizes[]" => "large_1024", :place_id => place_1_id})
 
     # create another place
     result = Cocoafish::Client.post("places/create.json", {:name => "Kingdom of Dumpling", :address => "1713 Taraval St", :city => "San Francisco", :state => "CA", :postal_code => "94116", :latitude => 37.742640, :longitude => -122.484597})
     place_2_id = result.response.places[0].id
 
     # checkin to the place with a photo and message
-    result = Cocoafish::Client.post("checkins/create.json", {:message => "Eating some awesome Chinese dumplings!", :photo => "/Users/mgoff/Desktop/dumplings.jpg", "photo_sync_sizes[]" => "large_1024", :place_id => place_2_id})
+    photo = File.new("/Users/mgoff/Desktop/dumplings.jpg", "rb")
+    result = Cocoafish::Client.post("checkins/create.json", {:message => "Eating some awesome Chinese dumplings!", :photo => photo, "photo_sync_sizes[]" => "large_1024", :place_id => place_2_id})
 
     # search for checkins from my current location in Union Square
     result = Cocoafish::Client.get("checkins/search.json", {:latitude => 37.787930, :longitude => -122.407499})
