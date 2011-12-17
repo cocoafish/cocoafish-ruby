@@ -65,12 +65,6 @@ module Cocoafish
           end
 
         when :post, :put
-          
-          data.each do |key,value|
-            if key.to_s == "photo" || key.to_s =~ /photos\[\d+\]/
-              data[key] = File.new(value, 'rb')
-            end
-          end
           data.merge!(:multipart => true)
 
           oauth_header = SimpleOAuth::Header.new(method, endpoint, nil, oauth_options)
