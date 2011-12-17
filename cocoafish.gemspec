@@ -5,18 +5,19 @@
 
 Gem::Specification.new do |s|
   s.name = "cocoafish"
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Goff", "Wei Kong"]
-  s.date = "2011-11-17"
-  s.description = "A Ruby client for Cocoafish. For more information about Mongo, see http://cocoafish.com."
+  s.date = "2011-12-17"
+  s.description = "A Ruby client for Cocoafish. For more information about Cocoafish, see http://cocoafish.com."
   s.email = "info@cocoafish.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"
   ]
   s.files = [
+    "./CHANGELOG.md",
     "./Gemfile",
     "./Gemfile.lock",
     "./LICENSE.txt",
