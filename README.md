@@ -41,6 +41,10 @@ Find the OAuth consumer key and secret for your app on the [Cocoafish app manage
 
     Cocoafish::Client.set_credentials('key', 'secret')
 
+By default, Ruby Client uses http protocol, if you wish to use SSL, you can use the hostname option:
+    
+    Cocoafish::Client.set_credentials('key', 'secret',  {:hostname=>"https://api.cocoafish.com"})
+
 ### Making Requests
 
 Use the Cocoafish client http methods to store and retrive data with Cocoafish by passing a url path and optional parameters hash:
