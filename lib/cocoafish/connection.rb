@@ -8,6 +8,8 @@ module Cocoafish
       @secret = secret
       @cookies = Hash.new
       @options = options
+      @user_agent = @options.delete(:user_agent)
+      @user_agent = "Cocoafish Ruby Client v#{CLIENT_VERSION}" if !@user_agent
     end
 
     def get(endpoint, data=nil)
@@ -53,7 +55,7 @@ module Cocoafish
         @header_cookies[:_session_id] = @session_id
       end
 
-      headers = { 'User-Agent' => "Cocoafish Ruby Client v#{CLIENT_VERSION}", :cookies => @header_cookies }
+      headers = { 'User-Agent' => @user_agent, :cookies => @header_cookies }
 
       oauth_options = {
         :consumer_key => @key,
