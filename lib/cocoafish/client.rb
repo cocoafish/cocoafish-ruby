@@ -30,6 +30,7 @@ module Cocoafish
       def get(endpoint, data=nil)
         raise NoConnectionEstablished  if @@connection.nil?
         json_hash = @@connection.get Cocoafish::Endpoint.url(@@realm, endpoint), data
+        
         parse_response(json_hash)
       end
 
@@ -48,7 +49,12 @@ module Cocoafish
       def put(endpoint, data=nil)
         raise NoConnectionEstablished  if @@connection.nil?
         json_hash = @@connection.put Cocoafish::Endpoint.url(@@realm, endpoint), data
-        parse_response(json_hash)
+        begin
+          parse_response(json_hash)
+        rescue
+          # binary data
+          json_hash
+        end
       end
       
       def parse_response(json_hash)

@@ -99,7 +99,9 @@ module Cocoafish
         begin
           content = JSON.parse(response.body)
         rescue JSON::ParserError
-          raise DecodeError, "content: <#{response.body}>"
+     #     raise DecodeError, "content: <#{response.body}>"
+          # Binary data
+          return response.body
         end
         # add json data
         content[:json] = response.body

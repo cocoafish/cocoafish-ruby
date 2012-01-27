@@ -1,5 +1,9 @@
 # Overview
 
+## 0.1.7
+
+* client get method can receive binary data now
+
 ## 0.1.6
 
 * Allow custom user-agent
