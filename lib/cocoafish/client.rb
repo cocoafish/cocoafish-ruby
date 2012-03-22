@@ -58,7 +58,7 @@ module Cocoafish
       end
       
       def parse_response(json_hash)
-        CocoafishObject.new(json_hash)
+        Hashie::Mash.new(json_hash)
       end
 
       def get_paginated_array(response)

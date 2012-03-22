@@ -2,6 +2,7 @@ require 'uri'
 require 'json'
 require 'rest_client'
 require 'simple_oauth'
+require 'hashie'
 
 require 'cocoafish/connection'
 require 'cocoafish/endpoint'
