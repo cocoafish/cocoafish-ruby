@@ -4,7 +4,7 @@ module Cocoafish
 
     class << self
       def url(realm, path)
-        [realm, API_VERSION, path].join('/')        
+        [realm, API_VERSION, path].join('/')
       end
     end
 
