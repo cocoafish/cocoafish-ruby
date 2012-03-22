@@ -10,10 +10,8 @@ GEM
     json_pure (1.4.6)
     mime-types (1.16)
     rake (0.9.2)
-    rcov (0.9.9)
     rest-client (1.6.3)
       mime-types (>= 1.16)
-    shoulda (2.11.3)
     simple_oauth (0.1.5)
 
 PLATFORMS
@@ -24,7 +22,5 @@ DEPENDENCIES
   hashie (~> 1.2.0)
   jeweler (~> 1.5.2)
   json_pure (~> 1.4.6)
-  rcov
   rest-client (~> 1.6.3)
-  shoulda
   simple_oauth (~> 0.1.4)
