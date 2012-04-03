@@ -1,5 +1,9 @@
 # Overview
 
+## 0.2.1
+
+* Fix issue with requiring files that didn't exist.
+
 ## 0.2.0
 
 * Responses are now returned as a `Hashie::Mash` instead of a custom object.

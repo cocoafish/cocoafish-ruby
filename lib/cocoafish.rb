@@ -7,8 +7,6 @@ require 'hashie'
 require 'cocoafish/connection'
 require 'cocoafish/endpoint'
 require 'cocoafish/client'
-require 'cocoafish/cocoafish_object'
-require 'cocoafish/objectified_hash'
 
 module Cocoafish
   API_VERSION = "v1"
