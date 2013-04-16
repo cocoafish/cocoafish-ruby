@@ -84,7 +84,7 @@ Cocoafish API servers return data in JSON format:
       }
     }
 
-The Ruby client library provides the response wrapped in an object accessible through dot notation:
+The Ruby client library returns the response as a `Hashie::Mash` ([more info](https://github.com/intridea/hashie)). A Mash is a Hash subclass that allows property access through dotnotation:
 
     result = Cocoafish::Client.post("users/login.json", {:login => "jane@cocoafish.com", :password => "cocoafish"})
     puts result.response.users[0].id

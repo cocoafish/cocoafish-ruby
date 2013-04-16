@@ -31,7 +31,6 @@ module Cocoafish
   private
 
     def request(method, endpoint, data)
-
       if data
         if !data.is_a?(Hash)
           raise "data must be a hash of parameters"
@@ -42,7 +41,7 @@ module Cocoafish
           end
         end
       end
-      
+
       # set the cookies to send with the header
       if !@options.has_key?(:manage_cookies) || @options[:manage_cookies] != false
         @header_cookies = @cookies
@@ -65,14 +64,14 @@ module Cocoafish
         :nonce => rand(10 ** 30).to_s.rjust(30,'0'),
         :timestamp => Time.now.to_i
       }
-      
+
       case method
         when :get, :delete
-          
+
           oauth_header = SimpleOAuth::Header.new(method, endpoint, data, oauth_options)
           options = headers.merge(:params => data, :authorization => oauth_header)
           begin
-            response = RestClient.send(method, endpoint, options)            
+            response = RestClient.send(method, endpoint, options)
           rescue RestClient::Exception => e
             raise CocoafishError.new(e), nil, caller[5..-1]
           end
@@ -82,7 +81,7 @@ module Cocoafish
 
           oauth_header = SimpleOAuth::Header.new(method, endpoint, nil, oauth_options)
           options = headers.merge(:authorization => oauth_header)
-          
+
           begin
             response = RestClient.send(method, endpoint, data, options)
           rescue RestClient::Exception => e
@@ -99,18 +98,15 @@ module Cocoafish
         begin
           content = JSON.parse(response.body)
         rescue JSON::ParserError
-     #     raise DecodeError, "content: <#{response.body}>"
           # Binary data
           return response.body
         end
         # add json data
         content[:json] = response.body
       end
-      
+
       return content
     end
-    
+
   end
 end
-
-

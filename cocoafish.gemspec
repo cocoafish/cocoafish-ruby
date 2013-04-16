@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "cocoafish"
-  s.version = "0.1.7"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Goff", "Wei Kong"]
-  s.date = "2011-12-17"
+  s.date = "2012-03-22"
   s.description = "A Ruby client for Cocoafish. For more information about Cocoafish, see http://cocoafish.com."
   s.email = "info@cocoafish.com"
   s.extra_rdoc_files = [
@@ -27,20 +27,14 @@ Gem::Specification.new do |s|
     "./cocoafish.gemspec",
     "lib/cocoafish.rb",
     "lib/cocoafish/client.rb",
-    "lib/cocoafish/cocoafish_object.rb",
     "lib/cocoafish/connection.rb",
-    "lib/cocoafish/endpoint.rb",
-    "lib/cocoafish/objectified_hash.rb"
+    "lib/cocoafish/endpoint.rb"
   ]
   s.homepage = "http://cocoafish.com"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.11"
   s.summary = "Cocoafish Ruby Client"
-  s.test_files = [
-    "test/helper.rb",
-    "test/test_cocoafish.rb"
-  ]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -49,10 +43,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rest-client>, ["~> 1.6.3"])
       s.add_runtime_dependency(%q<json_pure>, ["~> 1.4.6"])
       s.add_runtime_dependency(%q<simple_oauth>, ["~> 0.1.4"])
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_runtime_dependency(%q<hashie>, ["~> 1.2.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_runtime_dependency(%q<rest-client>, ["~> 1.6.3"])
       s.add_runtime_dependency(%q<json_pure>, ["~> 1.4.6"])
       s.add_runtime_dependency(%q<simple_oauth>, ["~> 0.1.4"])
@@ -60,10 +53,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rest-client>, ["~> 1.6.3"])
       s.add_dependency(%q<json_pure>, ["~> 1.4.6"])
       s.add_dependency(%q<simple_oauth>, ["~> 0.1.4"])
-      s.add_dependency(%q<shoulda>, [">= 0"])
+      s.add_dependency(%q<hashie>, ["~> 1.2.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-      s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<rest-client>, ["~> 1.6.3"])
       s.add_dependency(%q<json_pure>, ["~> 1.4.6"])
       s.add_dependency(%q<simple_oauth>, ["~> 0.1.4"])
@@ -72,10 +64,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rest-client>, ["~> 1.6.3"])
     s.add_dependency(%q<json_pure>, ["~> 1.4.6"])
     s.add_dependency(%q<simple_oauth>, ["~> 0.1.4"])
-    s.add_dependency(%q<shoulda>, [">= 0"])
+    s.add_dependency(%q<hashie>, ["~> 1.2.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
-    s.add_dependency(%q<rcov>, [">= 0"])
     s.add_dependency(%q<rest-client>, ["~> 1.6.3"])
     s.add_dependency(%q<json_pure>, ["~> 1.4.6"])
     s.add_dependency(%q<simple_oauth>, ["~> 0.1.4"])
